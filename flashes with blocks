@@ -1,0 +1,75 @@
+import random
+SKY_BLUE = color(0, 191, 255)
+locations_x = [100, 300]
+locations_y = [100, 300]
+flashes = [1,2,3,4]
+computers_choices = []
+counter = 0
+mousex = 0
+mousey = 0
+def setup():
+    size(640,480)
+
+def display_squares():
+    White= color(255)
+    Red = color(255,0,0)
+    Green = color(0,255,0)
+    Blue = color(0,0,255)
+    sqaure1 = squares(White,100,100)
+    sqaure2 = squares(Red,100, 300)
+    square3 = squares(Blue, 300, 100)
+    square4 = squares(Green, 300, 300)
+    
+def flashs():
+    global computers_choices
+    White= color(255)
+    Red = color(255,0,0)
+    Green = color(0,255,0)
+    Blue = color(0,0,255)
+    ran = random.choice(flashes)
+    if ran == 3:
+        Red = color(0)
+    elif ran == 2:
+        Blue = color(0)
+    elif ran == 4:
+        White = color(0)
+    elif ran == 1:
+        Green = color (0)
+    computers_choices.append(ran)
+    sqaure1 = squares(White,100,100)
+    sqaure2 = squares(Red,100, 300)
+    square3 = squares(Blue, 300, 100)
+    square4 = squares(Green, 300, 300)
+ 
+        
+class squares:
+    def __init__(self, colour, location_x, location_y):
+        self.colour = color(colour)
+        self.location_x = location_x
+        self.location_y = location_y
+        fill(colour)
+        rectMode(CENTER)
+        rect(location_x, location_y, 100, 100)
+
+
+
+def draw():
+    global counter
+    frameRate(1)
+    background(SKY_BLUE)
+    if counter == 50:
+        noLoop
+    elif counter%2 == 0:
+        display_squares()
+        counter += 1
+    else:
+        flashs()
+        counter += 1
+    if mousePressed:
+        print(mousex)
+
+def mousePressed():
+    global mousex
+    global mousey
+    mousex = mouseX
+    mousey = mouseY
