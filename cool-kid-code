@@ -1,0 +1,69 @@
+import random
+SKY_BLUE = color(0, 191, 255)
+flashes = [0,1,2,3]
+computers_choices = []
+square_list = []
+counter = 0
+colors = []
+player_turn = False
+def setup():
+    size(640,480)
+    colors.append(color(255))
+    colors.append(color(255,0,0))
+    colors.append(color(0,255,0))
+    colors.append(color(0,0,255))
+    square_list.append(squares(colors[0],100,100))
+    square_list.append(squares(colors[1],100, 300))
+    square_list.append(squares(colors[2], 300, 100))
+    square_list.append(squares(colors[3], 300, 300))
+
+def display_squares(counter):
+    if counter%10 == 5:
+        ran = random.choice(flashes)
+        square_list[ran].colour = color(0)
+        computers_choices.append(ran)
+    elif counter %10 == 0:
+        for i in range(len(square_list)):
+            square_list[i].colour = colors[i]
+    for i in square_list:
+        i.drawsquare();
+        
+def testplayer():
+    global player_turn
+    player_turn = True
+        
+class squares:
+    def __init__(self, colour, location_x, location_y):
+        self.colour = color(colour)
+        self.location_x = location_x
+        self.location_y = location_y
+        self.width = 100
+        self.height = 100
+    def drawsquare(self):
+        fill(self.colour)
+        #rectMode(CENTER)
+        rect(self.location_x, self.location_y, self.width, self.height)
+
+
+
+def draw():
+    global counter
+    background(SKY_BLUE)
+    
+    if counter <= 50:
+        counter += 0.5
+        display_squares(counter)
+    else:
+        display_squares(0)
+        testplayer()
+
+def mouseClicked():
+    if player_turn == True:
+        a = len(computers_choices)
+        for i in range(a):
+            current_square = computers_choices.pop(0)
+            if mouseX > square_list[current_square].location_x and mouseX < square_list[current_square].location_x+100 and mouseY > square_list[current_square].location_y and mouseY < square_list[current_square].location_y+100:
+                print("a")
+            else:
+                print("b")
+                #do whatever if u lose
