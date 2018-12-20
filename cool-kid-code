@@ -1,11 +1,11 @@
 import random
-player = 'win'
 SKY_BLUE = color(0, 191, 255)
 flashes = [0,1,2,3,4,5,6,7,8]
 computers_choices = []
 square_list = []
 counter = 0
 colors = []
+users_choices = []
 player_turn = False
 def setup():
     size(640,480)
@@ -17,15 +17,15 @@ def setup():
     colors.append(color(255,255,0))
     colors.append(color(255,234,126))
     colors.append(color(255,0,123))
-    colors.append(color(69,5,0))
+    colors.append(color(255,5,0))
     square_list.append(squares(colors[0],50,50))
     square_list.append(squares(colors[1],50, 200))
-    square_list.append(squares(colors[2], 250, 50))
-    square_list.append(squares(colors[3], 250, 200))
-    square_list.append(squares(colors[4], 450, 50))
-    square_list.append(squares(colors[5], 450, 200))
-    square_list.append(squares(colors[6], 50, 350))
-    square_list.append(squares(colors[7], 250, 350))
+    square_list.append(squares(colors[2],50, 350))
+    square_list.append(squares(colors[3], 250, 50))
+    square_list.append(squares(colors[4], 250, 200))
+    square_list.append(squares(colors[5], 250, 350))
+    square_list.append(squares(colors[6], 450, 50))
+    square_list.append(squares(colors[7], 450, 200))
     square_list.append(squares(colors[8], 450, 350))
 
 def display_squares(counter):
@@ -68,20 +68,41 @@ def draw():
         counter += 0.5
         display_squares(0)
         testplayer()
-    if player == 'lose':
-        rect(0,0,640,480)
-        textSize(100)
-        fill(255,0,0)
-        text("GAME OVER!",20, 125)
+        if len(users_choices) == len(computers_choices):
+            correctness = check_if_correct()
+            print(users_choices)
+            print(computers_choices)
+            if correctness:
+                counter = 0
+            else:
+                print('False')
+
+def check_if_correct():
+    if users_choices == computers_choices:
+        return True
+    else:
+        return False
 
 def mouseClicked():
-    global player
     if player_turn == True:
         a = len(computers_choices)
-        for i in range(a):
-            current_square = computers_choices.pop(0)
-            if mouseX > square_list[current_square].location_x and mouseX < square_list[current_square].location_x+100 and mouseY > square_list[current_square].location_y and mouseY < square_list[current_square].location_y+100:
-                print('a')
-            else:
-                player = 'lose'
-                #do whatever if u lose
+        if len(users_choices) == len(computers_choices):
+            player_turn == False
+        elif mouseX > square_list[0].location_x and mouseX < square_list[0].location_x+100 and mouseY > square_list[0].location_y and mouseY < square_list[0].location_y+100:
+            users_choices.append(0)
+        elif mouseX > square_list[1].location_x and mouseX < square_list[1].location_x+100 and mouseY > square_list[1].location_y and mouseY < square_list[1].location_y+100:
+            users_choices.append(1)
+        elif mouseX > square_list[2].location_x and mouseX < square_list[2].location_x+100 and mouseY > square_list[2].location_y and mouseY < square_list[2].location_y+100:
+            users_choices.append(2)
+        elif mouseX > square_list[3].location_x and mouseX < square_list[3].location_x+100 and mouseY > square_list[3].location_y and mouseY < square_list[3].location_y+100:
+            users_choices.append(3)
+        elif mouseX > square_list[4].location_x and mouseX < square_list[4].location_x+100 and mouseY > square_list[4].location_y and mouseY < square_list[4].location_y+100:
+            users_choices.append(4)
+        elif mouseX > square_list[5].location_x and mouseX < square_list[5].location_x+100 and mouseY > square_list[5].location_y and mouseY < square_list[5].location_y+100:
+            users_choices.append(5)
+        elif mouseX > square_list[6].location_x and mouseX < square_list[6].location_x+100 and mouseY > square_list[6].location_y and mouseY < square_list[6].location_y+100:
+            users_choices.append(6)
+        elif mouseX > square_list[7].location_x and mouseX < square_list[7].location_x+100 and mouseY > square_list[7].location_y and mouseY < square_list[7].location_y+100:
+            users_choices.append(7)
+        elif mouseX > square_list[8].location_x and mouseX < square_list[8].location_x+100 and mouseY > square_list[8].location_y and mouseY < square_list[8].location_y+100:
+            users_choices.append(8)
