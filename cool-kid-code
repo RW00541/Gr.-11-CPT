@@ -4,9 +4,11 @@ flashes = [0,1,2,3,4,5,6,7,8]
 computers_choices = []
 square_list = []
 counter = 0
+lives = 3
 colors = []
 users_choices = []
 player_turn = False
+num_of_flashes = 50
 def setup():
     size(640,480)
     colors.append(color(255))
@@ -17,7 +19,7 @@ def setup():
     colors.append(color(255,255,0))
     colors.append(color(255,234,126))
     colors.append(color(255,0,123))
-    colors.append(color(255,5,0))
+    colors.append(color(255,125,0))
     square_list.append(squares(colors[0],50,50))
     square_list.append(squares(colors[1],50, 200))
     square_list.append(squares(colors[2],50, 350))
@@ -55,27 +57,37 @@ class squares:
         #rectMode(CENTER)
         rect(self.location_x, self.location_y, self.width, self.height)
 
-
+def end_screen():
+    textSize(100)
+    fill(255,0,0)
+    text("GAME OVER!",20, 125)
+    textSize(20)
 
 def draw():
     global counter
+    global lives
+    global num_of_flashes
     background(SKY_BLUE)
-
-    if counter <= 50:
-        counter += 0.5
-        display_squares(counter)
+    if lives != 0:
+        if counter <= num_of_flashes:
+            counter += 0.5
+            display_squares(counter)
+        else:
+            counter += 0.5
+            display_squares(0)
+            testplayer()
+            if len(users_choices) == len(computers_choices):
+                correctness = check_if_correct()
+                print(users_choices)
+                print(computers_choices)
+                if correctness:
+                    counter = -5
+                    num_of_flashes += 10
+                else:
+                    lives -= 1
+                    counter = -5
     else:
-        counter += 0.5
-        display_squares(0)
-        testplayer()
-        if len(users_choices) == len(computers_choices):
-            correctness = check_if_correct()
-            print(users_choices)
-            print(computers_choices)
-            if correctness:
-                counter = 0
-            else:
-                print('False')
+        end_screen()
 
 def check_if_correct():
     if users_choices == computers_choices:
