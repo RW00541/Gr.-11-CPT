@@ -34,7 +34,6 @@ def setup():
     square_list.append(squares(colors[7], 450, 200))
     square_list.append(squares(colors[8], 450, 350))
 
-
 def display_squares(counter):
     if counter%10 == 5:
         ran = random.choice(flashes)
@@ -74,56 +73,65 @@ def end_screen():
     textSize(75)
     text("Restart", 190, 390)
 
+def level_screen():
+    fill(255)
+    rect(120, 80, 100, 100)
+    fill(255,0,0)
+    rect(120, 260, 100, 100)
+    fill(0,255,0)
+    rect(380, 80, 100, 100)
+    fill(0,0,255)
+    rect(380, 260, 100, 100)
+    fill(255,165,0)
+    textSize(35)
+    text("Easy", 130, 140)
+    textSize(26)
+    text("Normal", 385, 140)
+    textSize(33)
+    text("Hard", 130, 320)
+    text("Very", 390, 305)
+    text("Hard", 390, 350)
+
+def start_screen():
+    textSize(180)
+    fill(0,0,255)
+    text("G", 10, 200)
+    fill(0,255,0)
+    text("e", 140, 200)
+    fill(255,0,0)
+    text("o", 240, 200)
+    fill(255,255,0)
+    text("r", 350, 200)
+    fill(0,255,255)
+    text("g", 430, 200)
+    fill(255,0,255)
+    text("e", 540, 200)
+    fill(255)
+    rect(200, 300, 225, 90)
+    fill(255,0,0)
+    textSize(65)
+    text("START", 210, 370)
+
 def draw():
     global counter
     global lives
     global num_of_flashes
     global score
     global endscreen
+    global computers_choices
+    global users_choices
     background(SKY_BLUE)
     if startscreen:
-        textSize(180)
-        fill(0,0,255)
-        text("G", 10, 200)
-        fill(0,255,0)
-        text("e", 140, 200)
-        fill(255,0,0)
-        text("o", 240, 200)
-        fill(255,255,0)
-        text("r", 350, 200)
-        fill(0,255,255)
-        text("g", 430, 200)
-        fill(255,0,255)
-        text("e", 540, 200)
-        fill(255)
-        rect(200, 300, 225, 90)
-        fill(255,0,0)
-        textSize(65)
-        text("START", 210, 370)
+       start_screen()
     elif levelscreen:
         lives = 3
-        fill(255)
-        rect(120, 80, 100, 100)
-        fill(255,0,0)
-        rect(120, 260, 100, 100)
-        fill(0,255,0)
-        rect(380, 80, 100, 100)
-        fill(0,0,255)
-        rect(380, 260, 100, 100)
-        fill(255,165,0)
-        textSize(35)
-        text("Easy", 130, 140)
-        textSize(26)
-        text("Normal", 385, 140)
-        textSize(33)
-        text("Hard", 130, 320)
-        text("Very", 390, 305)
-        text("Hard", 390, 350)
+        level_screen()
     else:
         if lives != 0:
             fill(255)
             textSize(20)
             text("lives: {}".format(lives), 500, 20)
+            text("score: {}".format(score), 20, 20)
             if counter <= num_of_flashes:
                 counter += 0.5
                 display_squares(counter)
@@ -139,9 +147,13 @@ def draw():
                         score += 1
                         counter = -5
                         num_of_flashes += 10
+                        users_choices = []
+                        computers_choices = []
                     else:
                         lives -= 1
                         counter = -5
+                        users_choices = []
+                        computers_choices = []
         else:
             endscreen = True
         if endscreen:
