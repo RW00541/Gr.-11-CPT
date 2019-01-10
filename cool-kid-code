@@ -12,6 +12,11 @@ num_of_flashes = 50
 startscreen = True
 levelscreen = False
 endscreen = False
+math = False
+user_math_anw = '?'
+num1 = 0
+num2 = 0
+num3 = 0
 score = 0
 def setup():
     size(640,480)
@@ -44,6 +49,10 @@ def display_squares(counter):
             square_list[i].colour = colors[i]
     for i in square_list:
         i.drawsquare()
+
+def choose_num():
+    num = random.randint(1,12)
+    return num
 
 def testplayer():
     global player_turn
@@ -92,6 +101,11 @@ def level_screen():
     text("Very", 390, 305)
     text("Hard", 390, 350)
 
+def display_math(num1, num2, num3, user_math_anw):
+    textSize(50)
+    fill(255,0,0)
+    text("{} + {} x {} = {}".format(num1, num2, num3, user_math_anw),100, 200)   
+    
 def start_screen():
     textSize(180)
     fill(0,0,255)
@@ -120,6 +134,10 @@ def draw():
     global endscreen
     global computers_choices
     global users_choices
+    global math
+    global num1
+    global num2
+    global num3
     background(SKY_BLUE)
     if startscreen:
        start_screen()
@@ -128,32 +146,40 @@ def draw():
         level_screen()
     else:
         if lives != 0:
-            fill(255)
-            textSize(20)
-            text("lives: {}".format(lives), 500, 20)
-            text("score: {}".format(score), 20, 20)
-            if counter <= num_of_flashes:
-                counter += 0.5
-                display_squares(counter)
+            if math:
+                display_math(num1, num2, num3, user_math_anw)
             else:
-                counter += 0.5
-                display_squares(0)
-                testplayer()
-                if len(users_choices) == len(computers_choices):
-                    correctness = check_if_correct()
-                    print(users_choices)
-                    print(computers_choices)
-                    if correctness:
-                        score += 1
-                        counter = -5
-                        num_of_flashes += 10
-                        users_choices = []
-                        computers_choices = []
-                    else:
-                        lives -= 1
-                        counter = -5
-                        users_choices = []
-                        computers_choices = []
+                fill(255)
+                textSize(20)
+                text("lives: {}".format(lives), 500, 20)
+                text("score: {}".format(score), 20, 20)
+                if counter <= num_of_flashes:
+                    counter += 0.5
+                    display_squares(counter)
+                    num1 = choose_num()
+                    num2 = choose_num()
+                    num3 = choose_num()
+                elif score%5 == 1:
+                    math = True
+                else:
+                    counter += 0.5
+                    display_squares(0)
+                    testplayer()
+                    if len(users_choices) == len(computers_choices):
+                        correctness = check_if_correct()
+                        print(users_choices)
+                        print(computers_choices)
+                        if correctness:
+                            score += 1
+                            counter = -5
+                            num_of_flashes += 10
+                            users_choices = []
+                            computers_choices = []
+                        else:
+                            lives -= 1
+                            counter = -5
+                            users_choices = []
+                            computers_choices = []
         else:
             endscreen = True
         if endscreen:
@@ -169,7 +195,7 @@ def mouseClicked():
     global endscreen
     global startscreen
     global levelscreen
-    if startscreen:
+    while startscreen:
         if mouseY >= 300 and mouseY <= 390 and mouseX >=200 and mouseX <= 425:
             startscreen = False
             levelscreen = True
@@ -207,3 +233,31 @@ def mouseClicked():
         if mouseX >= 170 and mouseX <= 470 and mouseY >= 300 and mouseY <= 420:
             levelscreen = True
             endscreen = False
+
+def keyPressed():
+    global user_math_anw
+    global math
+    global score
+    if math:
+        if keyCode == 48:
+            user_math_anw += '0'
+        if keyCode == 49:
+            user_math_anw += '1'
+        if keyCode == 50:
+            user_math_anw += '2'
+        if keyCode == 51:
+            user_math_anw += '3'
+        if keyCode == 52:
+            user_math_anw += '4'
+        if keyCode == 53:
+            user_math_anw += '5'
+        if keyCode == 54:
+            user_math_anw += '6'
+        if keyCode == 55:
+            user_math_anw += '7'
+        if keyCode == 56:
+            user_math_anw += '8'
+        if keyCode == 57:
+            user_math_anw += '9'
+
+            
