@@ -130,6 +130,23 @@ def start_screen():
     textSize(65)
     text("START", 210, 370)
 
+def rule_screen():
+    textSize(150)
+    fill(255)
+    text("RULES", 40, 140)
+    textSize(25)
+    text("1: Select your difficulty", 10, 180)
+    text("2: The squares at the center of the screen will flash", 10, 220)
+    text("3: Memorize the sequence as it flashes", 10, 260)
+    text("4: Repeat the sequence by clicking the squares", 10, 300)
+    text("5: If you are wrong, you lose a life, be careful!!!", 10, 340)
+    text("6: For every level you pass, you get 1 point", 10, 380)
+    text("7: You only have 3 lives, don't get things wrong!", 10, 420)
+    text("8: Play until your lives are gone, aim for the top", 10, 460)
+    textSize(18)
+    text("Click here", 520, 40)
+    text("to continue", 520, 60)
+
 def draw():
     global counter
     global lives
@@ -145,6 +162,8 @@ def draw():
     background(SKY_BLUE)
     if gamestatus == 'startscreen':
        start_screen()
+    elif gamestatus == 'rulescreen':
+        rule_screen()
     elif gamestatus == 'levelscreen':
         lives = 3
         level_screen()
@@ -215,6 +234,8 @@ def test():
     assert check_if_correct([],[]) == True, 'should return true'
     assert check_if_correct([2,3,1,4,5,8], [2,3,1,4,5,8]) == True, 'should return true'
     assert check_math(1, 1, 5, 6) == True, 'should return true'
+    assert check_math(69, 21, 144, 3093) == True, 'should be true'
+    assert check_math(11, 11, 11, 132) == True, 'should be true'
     print('all passed')
 
 test()
@@ -228,6 +249,9 @@ def mouseClicked():
     global math_counter
     while gamestatus == 'startscreen':
         if mouseY >= 300 and mouseY <= 390 and mouseX >=200 and mouseX <= 425:
+            gamestatus = 'rulescreen'
+    if gamestatus == 'rulescreen':
+        if mouseX >= 520 and mouseY <= 70:
             gamestatus = 'levelscreen'
     if gamestatus == 'levelscreen':
         if mouseX >= 120 and mouseX <= 200 and mouseY >= 80 and mouseY <= 180:
