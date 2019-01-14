@@ -210,6 +210,15 @@ def check_math(num1, num2, num3, user_math_anw):
         else:
             incorrect = 'Incorrect anwser'
 
+def test():
+    assert check_if_correct([1,2,3,4,5], [8,7,8,1,3]) == False, 'should return false'
+    assert check_if_correct([],[]) == True, 'should return true'
+    assert check_if_correct([2,3,1,4,5,8], [2,3,1,4,5,8]) == True, 'should return true'
+    assert check_math(1, 1, 5, 6) == True, 'should return true'
+    print('all passed')
+
+test()
+
 def mouseClicked():
     global gamestatus
     global computers_choices
