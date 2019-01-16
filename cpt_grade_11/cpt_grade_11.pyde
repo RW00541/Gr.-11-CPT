@@ -1,3 +1,4 @@
+
 import random
 SKY_BLUE = color(0, 191, 255)
 flashes = [0,1,2,3,4,5,6,7,8]
@@ -46,10 +47,10 @@ def display_squares(counter):
         square_list[ran].colour = color(0)
         computers_choices.append(ran)
     elif counter %10 == 0:
-        for i in range(len(square_list)):
-            square_list[i].colour = colors[i]
-    for i in square_list:
-        i.drawsquare()
+        for square in range(len(square_list)):
+            square_list[square].colour = colors[square]
+    for square in square_list:
+        square.drawsquare()
 
 def choose_num():
     num = random.randint(1,12)
@@ -103,13 +104,16 @@ def level_screen():
     text("Hard", 390, 350)
 
 def display_math(num1, num2, num3, user_math_anw):
-    textSize(50)
+    textSize(30)
     fill(255,0,0)
+    text("Now answer this math question", 100, 100)
+    textSize(50)
     text("{} + {} x {} = {}".format(num1, num2, num3, user_math_anw),100, 200)   
     textSize(30)
     text('press "a" to enter', 100, 350)
     text("{}".format(error), 100, 400)
     text("{}".format(incorrect), 100, 300)
+    text("After that, repeat the sequence", 100, 450)
 
 def start_screen():
     textSize(180)
