@@ -1,7 +1,6 @@
-
 import random
 SKY_BLUE = color(0, 191, 255)
-flashes = [0,1,2,3,4,5,6,7,8]
+flashes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 computers_choices = []
 users_choices = []
 square_list = []
@@ -12,53 +11,57 @@ player_turn = False
 num_of_flashes = 50
 gamestatus = 'startscreen'
 user_math_anw = ''
-num1 = 0
-num2 = 0
-num3 = 0
-score = 0
-math_counter = 0
+num1 = num2 = num3 = score = math_counter = 0
 error = ''
 incorrect = ''
 difficulty = ''
+hearts = []
+
 def setup():
-    size(640,480)
+    global hearts
+    size(640, 480)
     colors.append(color(255))
-    colors.append(color(255,0,0))
-    colors.append(color(0,255,0))
-    colors.append(color(0,0,255))
-    colors.append(color(0,255,255))
-    colors.append(color(255,255,0))
-    colors.append(color(255,234,126))
-    colors.append(color(255,0,123))
-    colors.append(color(255,125,0))
-    square_list.append(squares(colors[0],50,50))
-    square_list.append(squares(colors[1],50, 200))
-    square_list.append(squares(colors[2],50, 350))
+    colors.append(color(255, 0, 0))
+    colors.append(color(0, 255, 0))
+    colors.append(color(0, 0, 255))
+    colors.append(color(0, 255, 255))
+    colors.append(color(255, 255, 0))
+    colors.append(color(255, 234, 126))
+    colors.append(color(255, 0, 123))
+    colors.append(color(255, 125, 0))
+    square_list.append(squares(colors[0], 50, 50))
+    square_list.append(squares(colors[1], 50, 200))
+    square_list.append(squares(colors[2], 50, 350))
     square_list.append(squares(colors[3], 250, 50))
     square_list.append(squares(colors[4], 250, 200))
     square_list.append(squares(colors[5], 250, 350))
     square_list.append(squares(colors[6], 450, 50))
     square_list.append(squares(colors[7], 450, 200))
     square_list.append(squares(colors[8], 450, 350))
+   
+
 
 def display_squares(counter):
-    if counter%10 == 5:
+    if counter % 10 == 5:
         ran = random.choice(flashes)
         square_list[ran].colour = color(0)
         computers_choices.append(ran)
-    elif counter %10 == 0:
+    elif counter % 10 == 0:
         for square in range(len(square_list)):
             square_list[square].colour = colors[square]
     for square in square_list:
         square.drawsquare()
 
+
 def choose_num():
-    num = random.randint(1,12)
+    num = random.randint(1, 12)
     return num
+
 
 def testplayer():
     global player_turn
     player_turn = True
+
 
 class squares:
     def __init__(self, colour, location_x, location_y):
@@ -71,6 +74,7 @@ class squares:
         fill(self.colour)
         #rectMode(CENTER)
         rect(self.location_x, self.location_y, self.width, self.height)
+
 
 def end_screen():
     textSize(100)
@@ -170,6 +174,8 @@ def draw():
     elif gamestatus == 'rulescreen':
         rule_screen()
     elif gamestatus == 'levelscreen':
+        for life in range(lives):
+            hearts.append(loadImage("heart.png"))
         lives = 3
         level_screen()
     else:
@@ -177,9 +183,10 @@ def draw():
             if gamestatus == 'math':
                 display_math(num1, num2, num3, user_math_anw)
             else:
+                for num in range(lives):
+                    image(hearts[num], num*20 + 550 , 10, 20, 20)
                 fill(255)
                 textSize(20)
-                text("lives: {}".format(lives), 500, 20)
                 text("score: {}".format(score), 20, 20)
                 if counter <= num_of_flashes:
                     counter += 0.5
@@ -219,6 +226,7 @@ def draw():
                                 num_of_flashes += 20
                         else:
                             lives -= 1
+                            hearts.pop(len(hearts)-1)
                             counter = -5
                             users_choices = []
                             computers_choices = []
