@@ -17,6 +17,7 @@ incorrect = ''
 difficulty = ''
 hearts = []
 
+
 def setup():
     global hearts
     size(640, 480)
@@ -38,7 +39,6 @@ def setup():
     square_list.append(squares(colors[6], 450, 50))
     square_list.append(squares(colors[7], 450, 200))
     square_list.append(squares(colors[8], 450, 350))
-   
 
 
 def display_squares(counter):
@@ -70,34 +70,35 @@ class squares:
         self.location_y = location_y
         self.width = 100
         self.height = 100
+
     def drawsquare(self):
         fill(self.colour)
-        #rectMode(CENTER)
         rect(self.location_x, self.location_y, self.width, self.height)
 
 
 def end_screen():
     textSize(100)
-    fill(255,0,0)
-    text("GAME OVER!",20, 125)
+    fill(255, 0, 0)
+    text("GAME OVER!", 20, 125)
     textSize(20)
     text("You completed {} levels on {} before running out of lives".format(score, difficulty), 10, 175)
-    fill(255,0,0)
+    fill(255, 0, 0)
     rect(170, 300, 300, 120)
     fill(255)
     textSize(75)
     text("Restart", 190, 390)
 
+
 def level_screen():
     fill(255)
     rect(120, 80, 100, 100)
-    fill(255,0,0)
+    fill(255, 0, 0)
     rect(120, 260, 100, 100)
-    fill(0,255,0)
+    fill(0, 255, 0)
     rect(380, 80, 100, 100)
-    fill(0,0,255)
+    fill(0, 0, 255)
     rect(380, 260, 100, 100)
-    fill(255,165,0)
+    fill(255, 165, 0)
     textSize(35)
     text("Easy", 130, 140)
     textSize(26)
@@ -107,37 +108,40 @@ def level_screen():
     text("Very", 390, 305)
     text("Hard", 390, 350)
 
+
 def display_math(num1, num2, num3, user_math_anw):
     textSize(30)
-    fill(255,0,0)
+    fill(255, 0, 0)
     text("Now answer this math question", 100, 100)
     textSize(50)
-    text("{} + {} x {} = {}".format(num1, num2, num3, user_math_anw),100, 200)   
+    text("{} + {} x {} = {}".format(num1, num2, num3, user_math_anw), 100, 200)
     textSize(30)
     text('press "a" to enter', 100, 350)
     text("{}".format(error), 100, 400)
     text("{}".format(incorrect), 100, 300)
     text("After that, repeat the sequence", 100, 450)
 
+
 def start_screen():
     textSize(180)
-    fill(0,0,255)
+    fill(0, 0, 255)
     text("G", 10, 200)
-    fill(0,255,0)
+    fill(0, 255, 0)
     text("e", 140, 200)
-    fill(255,0,0)
+    fill(255, 0, 0)
     text("o", 240, 200)
-    fill(255,255,0)
+    fill(255, 255, 0)
     text("r", 350, 200)
-    fill(0,255,255)
+    fill(0, 255, 255)
     text("g", 430, 200)
-    fill(255,0,255)
+    fill(255, 0, 255)
     text("e", 540, 200)
     fill(255)
     rect(200, 300, 225, 90)
-    fill(255,0,0)
+    fill(255, 0, 0)
     textSize(65)
     text("START", 210, 370)
+
 
 def rule_screen():
     textSize(150)
@@ -156,6 +160,7 @@ def rule_screen():
     text("Click here", 520, 40)
     text("to continue", 520, 60)
 
+
 def draw():
     global counter
     global lives
@@ -170,7 +175,7 @@ def draw():
     global math_counter
     background(SKY_BLUE)
     if gamestatus == 'startscreen':
-       start_screen()
+        start_screen()
     elif gamestatus == 'rulescreen':
         rule_screen()
     elif gamestatus == 'levelscreen':
@@ -184,7 +189,7 @@ def draw():
                 display_math(num1, num2, num3, user_math_anw)
             else:
                 for num in range(lives):
-                    image(hearts[num], num*20 + 550 , 10, 20, 20)
+                    image(hearts[num], num*20 + 550, 10, 20, 20)
                 fill(255)
                 textSize(20)
                 text("score: {}".format(score), 20, 20)
@@ -194,7 +199,7 @@ def draw():
                     num1 = choose_num()
                     num2 = choose_num()
                     num3 = choose_num()
-                elif math_counter%4 == 3:
+                elif math_counter % 4 == 3:
                     gamestatus = 'math'
                 else:
                     counter += 0.5
@@ -212,14 +217,14 @@ def draw():
                             users_choices = []
                             computers_choices = []
                             if difficulty == 'easy':
-                                if score%5 == 4:
+                                if score % 5 == 4:
                                     num_of_flashes += 10
                             elif difficulty == 'medium':
-                                if score%3 == 2:
+                                if score % 3 == 2:
                                     num_of_flashes += 10
                             elif difficulty == 'hard':
                                 math_counter += 1
-                                if score%3 == 2:
+                                if score % 3 == 2:
                                     num_of_flashes += 10
                             elif difficulty == 'very hard':
                                 math_counter += 2
@@ -235,11 +240,13 @@ def draw():
         if gamestatus == 'endscreen':
             end_screen()
 
+
 def check_if_correct(users_choices, computers_choices):
     if users_choices == computers_choices:
         return True
     else:
         return False
+
 
 def check_math(num1, num2, num3, user_math_anw):
     global error
@@ -255,16 +262,18 @@ def check_math(num1, num2, num3, user_math_anw):
         else:
             incorrect = 'Incorrect anwser'
 
+
 def test():
-    assert check_if_correct([1,2,3,4,5], [8,7,8,1,3]) == False, 'should return false'
-    assert check_if_correct([],[]) == True, 'should return true'
-    assert check_if_correct([2,3,1,4,5,8], [2,3,1,4,5,8]) == True, 'should return true'
+    assert check_if_correct([1, 2, 3, 4, 5], [8, 7, 8, 1, 3]) == False, 'should return false'
+    assert check_if_correct([], []) == True, 'should return true'
+    assert check_if_correct([2, 3, 1, 4, 5, 8], [2, 3, 1, 4, 5, 8]) == True, 'should return true'
     assert check_math(1, 1, 5, 6) == True, 'should return true'
     assert check_math(69, 21, 144, 3093) == True, 'should be true'
     assert check_math(11, 11, 11, 132) == True, 'should be true'
     print('all passed')
 
 test()
+
 
 def mouseClicked():
     global gamestatus
@@ -275,7 +284,7 @@ def mouseClicked():
     global math_counter
     global difficulty
     while gamestatus == 'startscreen':
-        if mouseY >= 300 and mouseY <= 390 and mouseX >=200 and mouseX <= 425:
+        if mouseY >= 300 and mouseY <= 390 and mouseX >= 200 and mouseX <= 425:
             gamestatus = 'rulescreen'
     if gamestatus == 'rulescreen':
         if mouseX >= 520 and mouseY <= 70:
@@ -320,6 +329,7 @@ def mouseClicked():
             score = 0
             math_counter = 0
             gamestatus = 'levelscreen'
+
 
 def keyPressed():
     global user_math_anw
