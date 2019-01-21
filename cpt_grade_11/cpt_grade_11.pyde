@@ -81,7 +81,8 @@ def end_screen():
     fill(255, 0, 0)
     text("GAME OVER!", 20, 125)
     textSize(20)
-    text("You completed {} levels on {} before running out of lives".format(score, difficulty), 10, 175)
+    text("You completed {} levels on {} before running out of lives"
+         .format(score, difficulty), 10, 175)
     fill(255, 0, 0)
     rect(170, 300, 300, 120)
     fill(255)
@@ -205,10 +206,12 @@ def draw():
                     counter += 0.5
                     display_squares(0)
                     fill(255)
-                    text("users choice: {}".format(users_choices), 20, height - 5)
+                    text("users choice: {}".format(users_choices), 20,
+                         height - 5)
                     testplayer()
                     if len(users_choices) == len(computers_choices):
-                        correctness = check_if_correct(users_choices, computers_choices)
+                        correctness = check_if_correct
+                        (users_choices, computers_choices)
                         print(users_choices)
                         print(computers_choices)
                         if correctness:
@@ -264,9 +267,11 @@ def check_math(num1, num2, num3, user_math_anw):
 
 
 def test():
-    assert check_if_correct([1, 2, 3, 4, 5], [8, 7, 8, 1, 3]) == False, 'should return false'
+    assert check_if_correct([1, 2, 3, 4, 5], [8, 7, 8, 1, 3]) == False,
+    'should return true'
     assert check_if_correct([], []) == True, 'should return true'
-    assert check_if_correct([2, 3, 1, 4, 5, 8], [2, 3, 1, 4, 5, 8]) == True, 'should return true'
+    assert check_if_correct([2, 3, 1, 4, 5, 8], [2, 3, 1, 4, 5, 8]) == True,
+    'should return true'
     assert check_math(1, 1, 5, 6) == True, 'should return true'
     assert check_math(69, 21, 144, 3093) == True, 'should be true'
     assert check_math(11, 11, 11, 132) == True, 'should be true'
@@ -305,23 +310,50 @@ def mouseClicked():
     if player_turn == True:
         if len(users_choices) == len(computers_choices):
             player_turn == False
-        elif mouseX > square_list[0].location_x and mouseX < square_list[0].location_x+100 and mouseY > square_list[0].location_y and mouseY < square_list[0].location_y+100:
+        elif mouseX > square_list[0].location_x and
+        mouseX < square_list[0].location_x+100 and
+        mouseY > square_list[0].location_y and
+        mouseY < square_list[0].location_y+100:
             users_choices.append(0)
-        elif mouseX > square_list[1].location_x and mouseX < square_list[1].location_x+100 and mouseY > square_list[1].location_y and mouseY < square_list[1].location_y+100:
+        elif mouseX > square_list[1].location_x and
+        mouseX < square_list[1].location_x+100 and
+        mouseY > square_list[1].location_y and
+        mouseY < square_list[1].location_y+100:
             users_choices.append(1)
-        elif mouseX > square_list[2].location_x and mouseX < square_list[2].location_x+100 and mouseY > square_list[2].location_y and mouseY < square_list[2].location_y+100:
+        elif mouseX > square_list[2].location_x and
+        mouseX < square_list[2].location_x+100 and
+        mouseY > square_list[2].location_y and
+        mouseY < square_list[2].location_y+100:
             users_choices.append(2)
-        elif mouseX > square_list[3].location_x and mouseX < square_list[3].location_x+100 and mouseY > square_list[3].location_y and mouseY < square_list[3].location_y+100:
+        elif mouseX > square_list[3].location_x and
+        mouseX < square_list[3].location_x+100 and
+        mouseY > square_list[3].location_y and
+        mouseY < square_list[3].location_y+100:
             users_choices.append(3)
-        elif mouseX > square_list[4].location_x and mouseX < square_list[4].location_x+100 and mouseY > square_list[4].location_y and mouseY < square_list[4].location_y+100:
+        elif mouseX > square_list[4].location_x and
+        mouseX < square_list[4].location_x+100 and
+        mouseY > square_list[4].location_y and
+        mouseY < square_list[4].location_y+100:
             users_choices.append(4)
-        elif mouseX > square_list[5].location_x and mouseX < square_list[5].location_x+100 and mouseY > square_list[5].location_y and mouseY < square_list[5].location_y+100:
+        elif mouseX > square_list[5].location_x and
+        mouseX < square_list[5].location_x+100 and
+        mouseY > square_list[5].location_y and
+        mouseY < square_list[5].location_y+100:
             users_choices.append(5)
-        elif mouseX > square_list[6].location_x and mouseX < square_list[6].location_x+100 and mouseY > square_list[6].location_y and mouseY < square_list[6].location_y+100:
+        elif mouseX > square_list[6].location_x and
+        mouseX < square_list[6].location_x+100 and
+        mouseY > square_list[6].location_y and
+        mouseY < square_list[6].location_y+100:
             users_choices.append(6)
-        elif mouseX > square_list[7].location_x and mouseX < square_list[7].location_x+100 and mouseY > square_list[7].location_y and mouseY < square_list[7].location_y+100:
+        elif mouseX > square_list[7].location_x and
+        mouseX < square_list[7].location_x+100 and
+        mouseY > square_list[7].location_y and
+        mouseY < square_list[7].location_y+100:
             users_choices.append(7)
-        elif mouseX > square_list[8].location_x and mouseX < square_list[8].location_x+100 and mouseY > square_list[8].location_y and mouseY < square_list[8].location_y+100:
+        elif mouseX > square_list[8].location_x and
+        mouseX < square_list[8].location_x+100 and
+        mouseY > square_list[8].location_y and
+        mouseY < square_list[8].location_y+100:
             users_choices.append(8)
     if gamestatus == 'endscreen':
         if mouseX >= 170 and mouseX <= 470 and mouseY >= 300 and mouseY <= 420:
