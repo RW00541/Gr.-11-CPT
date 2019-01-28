@@ -310,50 +310,23 @@ def mouseClicked():
     if player_turn == True:
         if len(users_choices) == len(computers_choices):
             player_turn == False
-        elif mouseX > square_list[0].location_x and
-        mouseX < square_list[0].location_x+100 and
-        mouseY > square_list[0].location_y and
-        mouseY < square_list[0].location_y+100:
+        elif mouseX > square_list[0].location_x and mouseX < square_list[0].location_x+100 and mouseY > square_list[0].location_y and mouseY < square_list[0].location_y+100:
             users_choices.append(0)
-        elif mouseX > square_list[1].location_x and
-        mouseX < square_list[1].location_x+100 and
-        mouseY > square_list[1].location_y and
-        mouseY < square_list[1].location_y+100:
+        elif mouseX > square_list[1].location_x and mouseX < square_list[1].location_x+100 and mouseY > square_list[1].location_y and mouseY < square_list[1].location_y+100:
             users_choices.append(1)
-        elif mouseX > square_list[2].location_x and
-        mouseX < square_list[2].location_x+100 and
-        mouseY > square_list[2].location_y and
-        mouseY < square_list[2].location_y+100:
+        elif mouseX > square_list[2].location_x and mouseX < square_list[2].location_x+100 and mouseY > square_list[2].location_y and mouseY < square_list[2].location_y+100:
             users_choices.append(2)
-        elif mouseX > square_list[3].location_x and
-        mouseX < square_list[3].location_x+100 and
-        mouseY > square_list[3].location_y and
-        mouseY < square_list[3].location_y+100:
+        elif mouseX > square_list[3].location_x and mouseX < square_list[3].location_x+100 and mouseY > square_list[3].location_y and mouseY < square_list[3].location_y+100:
             users_choices.append(3)
-        elif mouseX > square_list[4].location_x and
-        mouseX < square_list[4].location_x+100 and
-        mouseY > square_list[4].location_y and
-        mouseY < square_list[4].location_y+100:
+        elif mouseX > square_list[4].location_x and mouseX < square_list[4].location_x+100 and mouseY > square_list[4].location_y and mouseY < square_list[4].location_y+100:
             users_choices.append(4)
-        elif mouseX > square_list[5].location_x and
-        mouseX < square_list[5].location_x+100 and
-        mouseY > square_list[5].location_y and
-        mouseY < square_list[5].location_y+100:
+        elif mouseX > square_list[5].location_x and mouseX < square_list[5].location_x+100 and mouseY > square_list[5].location_y and mouseY < square_list[5].location_y+100:
             users_choices.append(5)
-        elif mouseX > square_list[6].location_x and
-        mouseX < square_list[6].location_x+100 and
-        mouseY > square_list[6].location_y and
-        mouseY < square_list[6].location_y+100:
+        elif mouseX > square_list[6].location_x and mouseX < square_list[6].location_x+100 and mouseY > square_list[6].location_y and mouseY < square_list[6].location_y+100:
             users_choices.append(6)
-        elif mouseX > square_list[7].location_x and
-        mouseX < square_list[7].location_x+100 and
-        mouseY > square_list[7].location_y and
-        mouseY < square_list[7].location_y+100:
+        elif mouseX > square_list[7].location_x and mouseX < square_list[7].location_x+100 and mouseY > square_list[7].location_y and mouseY < square_list[7].location_y+100:
             users_choices.append(7)
-        elif mouseX > square_list[8].location_x and
-        mouseX < square_list[8].location_x+100 and
-        mouseY > square_list[8].location_y and
-        mouseY < square_list[8].location_y+100:
+        elif mouseX > square_list[8].location_x and mouseX < square_list[8].location_x+100 and mouseY > square_list[8].location_y and mouseY < square_list[8].location_y+100:
             users_choices.append(8)
     if gamestatus == 'endscreen':
         if mouseX >= 170 and mouseX <= 470 and mouseY >= 300 and mouseY <= 420:
