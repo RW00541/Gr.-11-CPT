@@ -81,8 +81,7 @@ def end_screen():
     fill(255, 0, 0)
     text("GAME OVER!", 20, 125)
     textSize(20)
-    text("You completed {} levels on {} before running out of lives"
-         .format(score, difficulty), 10, 175)
+    text("You completed {} levels on {} before running out of lives".format(score, difficulty), 10, 175)
     fill(255, 0, 0)
     rect(170, 300, 300, 120)
     fill(255)
@@ -206,12 +205,10 @@ def draw():
                     counter += 0.5
                     display_squares(0)
                     fill(255)
-                    text("users choice: {}".format(users_choices), 20,
-                         height - 5)
+                    text("users choice: {}".format(users_choices), 20, height - 5)
                     testplayer()
                     if len(users_choices) == len(computers_choices):
-                        correctness = check_if_correct
-                        (users_choices, computers_choices)
+                        correctness = check_if_correct(users_choices, computers_choices)
                         print(users_choices)
                         print(computers_choices)
                         if correctness:
@@ -267,11 +264,9 @@ def check_math(num1, num2, num3, user_math_anw):
 
 
 def test():
-    assert check_if_correct([1, 2, 3, 4, 5], [8, 7, 8, 1, 3]) == False,
-    'should return true'
+    assert check_if_correct([1, 2, 3, 4, 5], [8, 7, 8, 1, 3]) == False, 'should return false'
     assert check_if_correct([], []) == True, 'should return true'
-    assert check_if_correct([2, 3, 1, 4, 5, 8], [2, 3, 1, 4, 5, 8]) == True,
-    'should return true'
+    assert check_if_correct([2, 3, 1, 4, 5, 8], [2, 3, 1, 4, 5, 8]) == True, 'should return true'
     assert check_math(1, 1, 5, 6) == True, 'should return true'
     assert check_math(69, 21, 144, 3093) == True, 'should be true'
     assert check_math(11, 11, 11, 132) == True, 'should be true'
